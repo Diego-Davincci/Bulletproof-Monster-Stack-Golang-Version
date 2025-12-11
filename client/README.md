@@ -1,4 +1,4 @@
-# Fronted for Bulletproof Monster Stack 🔥
+# Fronted - Bulletproof Monster Stack 🔥
 
 ## Libraries
 
