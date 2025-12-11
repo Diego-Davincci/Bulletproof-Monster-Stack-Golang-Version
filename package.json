@@ -1,0 +1,9 @@
+{
+  "name": "bulletproof-monster-stack-node-version",
+  "version": "1.0.0",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "private": true
+}
