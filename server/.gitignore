@@ -1,0 +1,4 @@
+# Ignore unncesesary files
+.env
+node_modules
+dist
