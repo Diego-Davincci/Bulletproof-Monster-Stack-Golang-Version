@@ -33,7 +33,7 @@
 
 Write tests for business logic!!!
 
-## Architecture - Feature based layers
+## Architecture - Feature (Domain Oriented) based layers
 
 ```
 src/

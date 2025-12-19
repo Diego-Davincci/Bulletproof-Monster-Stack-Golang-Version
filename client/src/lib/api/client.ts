@@ -1,6 +1,6 @@
 // Provide custom methods to communicate with the API
 
-import type { ApiRsp } from "@/types/common.types";
+import type { ApiRsp } from "@/types";
 import { createNewApiError, type ApiError } from "../utils/helpers";
 
 /**
