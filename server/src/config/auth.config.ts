@@ -13,7 +13,8 @@ export const authConfig = {
     sameSite: "lax",
     path: "/",
     domain: __prod__ ? env.DOMAIN : "localhost",
-  },
+    maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 year
+  } as const,
 
   // Tokens expiry time
   tokens: {

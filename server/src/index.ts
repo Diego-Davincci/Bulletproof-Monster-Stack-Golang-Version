@@ -4,6 +4,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import "dotenv/config";
+import { authRoutes } from "@/modules/auth/auth.routes";
+import passport from "passport";
 
 const main = async () => {
   try {
@@ -23,8 +25,10 @@ const main = async () => {
     server.use(Express.json());
     server.use(cookieParser());
     server.use(morgan("combined"));
+    server.use(passport.initialize()); // Create passport instance to execute auth strategies
 
-    // Routing TODO: health endpoint
+    // Routing, TODO: health endpoint
+    server.use("/auth", authRoutes);
 
     // Start server
     const PORT = Number(process.env.PORT) || 5000;

@@ -11,6 +11,7 @@ const pool = new Pool({
 });
 
 export type DbUSer = typeof usersTable.$inferSelect;
+export type DbUserAuthProvider = typeof authProvidersTable.$inferSelect;
 
 export const db = drizzle(pool, {
   schema: {

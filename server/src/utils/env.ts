@@ -1,6 +1,7 @@
 export const getEnv = () => ({
   DB_URL: process.env.DB_URL || "",
   DOMAIN: process.env.DOMAIN || "localhost",
+  WEBSITE: process.env.WEBSITE || "http://localhost:5173",
 
   API_URL: process.env.API_URL || "http://localhost:5000",
 
