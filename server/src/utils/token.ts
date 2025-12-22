@@ -52,9 +52,8 @@ export const createTokens = (
 export const checkTokens = (
   accessToken: string,
   refreshToken: string
-): { userID?: number; authorized: boolean } => {
+): { userID?: number; authorized: boolean; updateAccessToken: boolean } => {
   // Verify access token
-
   try {
     const accessTokenData = <TokenPayload>(
       jwt.verify(accessToken, env.ACCESS_TOKEN_KEY)
@@ -62,6 +61,7 @@ export const checkTokens = (
     return {
       userID: accessTokenData.userID,
       authorized: true,
+      updateAccessToken: false,
     };
   } catch {
     // Access token is either expired or signed with a different secret !
@@ -75,12 +75,14 @@ export const checkTokens = (
     return {
       userID: refreshTokenData.userID,
       authorized: true,
+      updateAccessToken: true,
     };
   } catch (err) {
     // Refresh token is either expired or signed with a different secret, throw the err !
     return {
       userID: undefined,
       authorized: false,
+      updateAccessToken: false,
     };
   }
 };

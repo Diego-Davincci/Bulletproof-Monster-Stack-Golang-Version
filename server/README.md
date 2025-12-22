@@ -1,28 +1,25 @@
 # Backend for Bulletproof Monster Stack 🔥
 
-## Libraries
+## API goal
 
-- Express
+write down here what the API is being build for the client...
 
-## ¿ Docs ?
+### Core Libraries 📚
 
-- Swagger
-- Codebase structure
+- Express 👉 To create fully our API (routing, middlewares etc..)
+- Drizzle ORM and Pg 👉 To handle DB communication, operations, migrations (we're using postgres)
+- Passport and Passport-google-oauth20 👉 To handle OAUTH flow with providers such as google
+- Morgan 👉 Server logging
+- Jsonwebtoken 👉 To create JWT for auth
+- Cors 👉 Block unknown requests from websites
 
-## ¿ Testing ?
-
-- Unit test with ¿vitest? ¿jest?
-
-## Feature based, Domain-Oriented Architecture
+### Feature based | Domain-Oriented Architecture
 
 ```
 src/
-├── app.ts                   # Entry point of the Express app (main application setup)
-├── server.ts                # Server bootstrapping (server listening on ports)
-├── modules/
+├── index.ts     # Main server API setup
+├── modules/     # Features separated by folders
 │   ├── _shared/
-│   │   ├── base.repository.ts  # Base repository class (common DB interactions)
-│   │   └── errors.ts           # Utility functions for error handling (e.g., custom error classes)
 │   ├── user/
 │   │   ├── user.routes.ts      # API routes for user-related endpoints
 │   │   ├── user.controller.ts  # Controllers to handle requests and delegate business logic to services

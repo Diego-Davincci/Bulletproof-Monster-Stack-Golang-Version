@@ -77,3 +77,8 @@ export const HTTP_STATUS = {
   NOT_EXTENDED: 510, // Further extensions to the request are required for the server to fulfill it
   NETWORK_AUTHENTICATION_REQUIRED: 511, // Client needs to authenticate to gain network access
 };
+
+/* Common 5xx responses */
+export const COMMON_MESSAGES = {
+  INTERNAL_SERVER_ERROR: "Server failed to response",
+};

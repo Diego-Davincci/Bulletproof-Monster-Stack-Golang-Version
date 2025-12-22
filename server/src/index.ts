@@ -4,8 +4,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import morgan from "morgan";
 import "dotenv/config";
-import { authRoutes } from "@/modules/auth/auth.routes";
 import passport from "passport";
+import rateLimit from "express-rate-limit";
+
+import { authRoutes } from "@/modules/auth/auth.routes";
 
 const main = async () => {
   try {
@@ -26,8 +28,18 @@ const main = async () => {
     server.use(cookieParser());
     server.use(morgan("combined"));
     server.use(passport.initialize()); // Create passport instance to execute auth strategies
+    const ApiLimiter = rateLimit({
+      // Rate limit the API to potentially avoid DDOS
+      windowMs: 10 * 60 * 1000,
+      limit: 200,
+      standardHeaders: "draft-8",
+      legacyHeaders: false,
+      ipv6Subnet: 60,
+    });
+    server.use(ApiLimiter);
 
-    // Routing, TODO: health endpoint
+    // TODO: health endpoint
+    // Routing
     server.use("/auth", authRoutes);
 
     // Start server

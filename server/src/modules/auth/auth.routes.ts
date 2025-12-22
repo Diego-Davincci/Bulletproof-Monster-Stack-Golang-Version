@@ -1,6 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { googleCallback } from "./auth.controller";
+import { auth } from "@/middlewares/auth.middleware";
 
 export const authRoutes = (): Router => {
   const router = Router();
@@ -17,7 +18,7 @@ export const authRoutes = (): Router => {
   );
 
   // User info
-  router.get("/me");
+  router.get("/me", auth);
 
   return router;
 };
