@@ -24,7 +24,7 @@ export const createTokens = (
   // @ts-ignore
   const refreshToken = jwt.sign(
     { userID: user.userID } satisfies TokenPayload,
-    env.REFRESH_TOKEN_KEY,
+    env.REFRESH_TOKEN_SECRET,
     {
       expiresIn: authConfig.tokens.refresh,
     }
@@ -33,7 +33,7 @@ export const createTokens = (
   // @ts-ignore
   const accessToken = jwt.sign(
     { userID: user.userID } satisfies TokenPayload,
-    env.ACCESS_TOKEN_KEY,
+    env.ACCESS_TOKEN_SECRET,
     {
       expiresIn: authConfig.tokens.access,
     }
@@ -56,7 +56,7 @@ export const checkTokens = (
   // Verify access token
   try {
     const accessTokenData = <TokenPayload>(
-      jwt.verify(accessToken, env.ACCESS_TOKEN_KEY)
+      jwt.verify(accessToken, env.ACCESS_TOKEN_SECRET)
     );
     return {
       userID: accessTokenData.userID,
@@ -70,7 +70,7 @@ export const checkTokens = (
   // Now check refresh token
   try {
     const refreshTokenData = <TokenPayload>(
-      jwt.verify(refreshToken, env.REFRESH_TOKEN_KEY)
+      jwt.verify(refreshToken, env.REFRESH_TOKEN_SECRET)
     );
     return {
       userID: refreshTokenData.userID,

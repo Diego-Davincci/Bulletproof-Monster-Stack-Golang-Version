@@ -1,6 +1,12 @@
 import { Profile } from "passport";
-import { createNewOauthUser, findUserByEmail } from "./auth.repository";
+import {
+  createNewOauthUser,
+  findUserByEmail,
+  findUserByID,
+} from "./auth.repository";
 import { DbUSer } from "@/db/client";
+import { ApiRsp } from "@/types";
+import { HTTP_STATUS } from "@/utils/constants";
 
 /**
  * Find or create a Oauth user (google flow)
@@ -34,7 +40,46 @@ export const findOrCreateOauthUser = async (
 
     return newUser;
   } catch (err) {
-    console.error("Problems with findOrCreateOauthUser fn: ", err);
-    throw new Error(`Problems with findOrCreateOauthUser fn: ${err}`);
+    throw err;
+  }
+};
+
+interface UserRsp {
+  userID: number;
+  email: string;
+  username: string;
+  picture: string | null;
+}
+
+/**
+ * Get user data
+ *
+ * @param userID
+ * @returns {Object}
+ */
+export const getUserData = async (userID: number): Promise<ApiRsp> => {
+  try {
+    const user = await findUserByID(userID);
+    if (!user) {
+      return {
+        data: null,
+        message: "",
+        statusCode: HTTP_STATUS.UNAUTHORIZED,
+      };
+    }
+
+    const userRsp: UserRsp = {
+      userID,
+      username: user.username,
+      email: user.email,
+      picture: user.picture,
+    };
+    return {
+      data: userRsp,
+      message: "",
+      statusCode: HTTP_STATUS.OK,
+    };
+  } catch (err) {
+    throw err;
   }
 };

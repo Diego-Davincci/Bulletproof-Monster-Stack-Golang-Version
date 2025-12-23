@@ -34,7 +34,16 @@ export const getHttpRequest = async <Response>(
       });
       throw apiError;
     }
-    // Check is there was bad user input, status code = 4xx
+    // Check if user is unathorized, status code = 401
+    if (rsp.statusCode === 401) {
+      const apiError = createNewApiError({
+        errorTitle: "Unauthorized",
+        errorMsg: rsp.message,
+        statusCode: rsp.statusCode,
+      });
+      throw apiError;
+    }
+    // Check if there was bad user input, status code = 400
     if (rsp.statusCode === 400) {
       const apiError = createNewApiError({
         errorTitle: "Bad input",
@@ -101,6 +110,15 @@ export const mutationHttpRequest = async <Payload, Response>({
     if (rsp.statusCode >= 500) {
       const apiError = createNewApiError({
         errorTitle: "Something went wrong!",
+        errorMsg: rsp.message,
+        statusCode: rsp.statusCode,
+      });
+      throw apiError;
+    }
+    // Check if user is unathorized, status code = 401
+    if (rsp.statusCode === 401) {
+      const apiError = createNewApiError({
+        errorTitle: "Unauthorized",
         errorMsg: rsp.message,
         statusCode: rsp.statusCode,
       });

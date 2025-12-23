@@ -15,30 +15,47 @@ write down here what the API is being build for the client...
 
 ### Feature based | Domain-Oriented Architecture
 
+The API has a feature based architecture to separate specific concerns, logic, and functions in order to have files and folders with unique and specific goals
+
+- Controller Layer 👉 Handle incoming requests, validate data input, generate appropiate responses
+- Service Layer 👉 Handle all bussines logic
+- Repository Layer 👉 Handle the data layer by accessing the DB
+
+<br/>
+
 ```
 src/
-├── index.ts     # Main server API setup
-├── modules/     # Features separated by folders
-│   ├── _shared/
-│   ├── user/
-│   │   ├── user.routes.ts      # API routes for user-related endpoints
-│   │   ├── user.controller.ts  # Controllers to handle requests and delegate business logic to services
-│   │   ├── user.service.ts     # Core business logic for managing users
-│   │   ├── user.repository.ts  # Data access layer, interacts with the database for user-related queries
-│   │   └── user.schema.ts      # Drizzle schema definitions for user table
-│   └── auth/
-│       ├── auth.routes.ts      # Routes for authentication endpoints (e.g., login, register)
-│       ├── auth.service.ts     # Auth-related business logic (e.g., generating JWT)
-│       └── auth.controller.ts  # Controllers for authentication
-├── db/
-│   ├── client.ts             # Database client setup (Drizzle configuration, connection)
-│   └── schema.ts             # Global database schema definitions (e.g., common types, models)
-├── middlewares/
-│   ├── error.middleware.ts    # Global error handler middleware
-│   └── auth.middleware.ts     # Middleware to authenticate requests (e.g., JWT token verification)
-├── utils/
-│   ├── env.ts                # Configuration setup (loading environment variables)
-│   └── logger.ts             # Logger utility (to centralize logging configuration)
-└── tests/
-    └── user.test.ts           # Unit and integration tests for user module
+├── index.ts    # Main API setup
+│
+├── config/                   # 🔧 Configuration files
+│   ├── auth.config.ts        # Auth settings (tokens, cookies, validation rules)
+│   └── passport.config.ts    # Passport strategies setup (Google OAuth)
+|
+├── db/                       # 🗄️ Database layer (centralized)
+│   ├── client.ts             # Drizzle ORM client initialization & pool
+│   ├── schema.ts             # All table definitions (users, auth_providers)
+│   └── migrations/           # Auto-generated Drizzle migrations (version-controlled)
+│
+├── middlewares/              # ⚙️ Express middlewares
+│   └── auth.middleware.ts    # JWT verification & token refresh logic
+│
+├── modules/                  # 🎯 Feature modules (domain-driven)
+│   ├── _shared/              # Shared utilities across modules
+│   │
+│   └── auth/                           # Authentication feature
+|       ├── __tests__                   # Provide meaningful and isolated test cases for every layer
+│       ├── auth.routes.ts              # All auth endpoints
+│       ├── auth.controller.ts          # Request handlers & response formatting
+│       ├── auth.service.ts             # Core business logic
+│       └── auth.repository.ts          # Database queries specific to auth (user lookups)
+│
+├── types/                    # 📝 TypeScript type definitions
+│   └── index.ts              # Global type exports & interfaces
+│
+├── utils/                    # 🛠️ Utility functions
+│   ├── env.ts                # Environment variables loader & type-safe access
+│   ├── constants.ts          # App constants (production flag, HTTP codes)
+│   ├── json.ts               # Standardized JSON response builder
+│   ├── token.ts              # Token creation, verification & cookie management
+│
 ```

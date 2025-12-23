@@ -4,6 +4,14 @@ import { buildJsonRsp } from "@/utils/json";
 import { checkTokens, setAuthCookies } from "@/utils/token";
 import type { Request, Response, NextFunction } from "express";
 
+/*
+  TESTS, // TODO:
+  1. either access token or refresh token not present 👉 return 401 unauthorized ✅
+  2. access token expired 👉 set new refresh and access token to user cookies ✅
+  3. refresh expired or signed with a different key 👉 return 401 unauthorized ✅
+  4. both access and refresh token present and are not expired 👉 middleware sets req.user = userID ✅
+*/
+
 export const auth = async (
   req: Request,
   res: Response,
@@ -18,10 +26,11 @@ export const auth = async (
       res.status(HTTP_STATUS.UNAUTHORIZED).json(
         buildJsonRsp({
           data: null,
-          message: "Unauthorized",
+          message: "Can't perform this actions",
           statusCode: HTTP_STATUS.UNAUTHORIZED,
         })
       );
+      return;
     }
 
     // Check both tokens, we need to know wether they are valid/expired
@@ -35,10 +44,11 @@ export const auth = async (
       res.status(HTTP_STATUS.UNAUTHORIZED).json(
         buildJsonRsp({
           data: null,
-          message: "Unauthorized",
+          message: "Can't perform this actions",
           statusCode: HTTP_STATUS.UNAUTHORIZED,
         })
       );
+      return;
     }
 
     // If req is authorized and a userID is available, set it to the "req" object
@@ -55,10 +65,11 @@ export const auth = async (
         res.status(HTTP_STATUS.UNAUTHORIZED).json(
           buildJsonRsp({
             data: null,
-            message: "Unauthorized",
+            message: "Can't perform this actions",
             statusCode: HTTP_STATUS.UNAUTHORIZED,
           })
         );
+        return;
       }
     }
   } catch (err) {
@@ -70,6 +81,7 @@ export const auth = async (
         statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR,
       })
     );
+    return;
   }
   next();
 };

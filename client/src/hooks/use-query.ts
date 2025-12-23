@@ -16,7 +16,7 @@ import { useQuery } from "@tanstack/react-query";
  * @param url - Backend API URL
  *
  */
-export const useGetQuery = ({
+export const useGetQuery = <Response>({
   queryKey,
   url,
 }: {
@@ -25,6 +25,6 @@ export const useGetQuery = ({
 }) => {
   return useQuery({
     queryKey,
-    queryFn: () => getHttpRequest(url),
+    queryFn: () => getHttpRequest<Response>(url),
   });
 };
