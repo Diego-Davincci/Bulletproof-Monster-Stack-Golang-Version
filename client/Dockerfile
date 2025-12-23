@@ -9,6 +9,8 @@ RUN yarn install --frozen-lockfile
 
 ENV PATH /app/node_modules/.bin:$PATH
 
+COPY .env.example .env
+
 COPY . .
 
 RUN yarn build
