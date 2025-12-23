@@ -7,6 +7,8 @@
 
 ## Deployment
 
+Railway !!
+
 ## Project specifications
 
 - **goal**: ....
