@@ -33,7 +33,7 @@ RUN yarn install --ignore-engines --production --frozen-lockfile && yarn cache c
 COPY --from=builder /app/build ./src
 
 # Copy the .env file
-COPY .env.production .env
+COPY .env.example .env
 
 # Set environment variables (optional, for production)
 ENV NODE_ENV=production
