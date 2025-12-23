@@ -1,4 +1,5 @@
 # Ignore unncesesary files
 .env
+.env.production
 node_modules
 dist
