@@ -1,6 +1,6 @@
-FROM node:20.11.1-alpine3.19 AS build
+FROM node:22-alpine AS build
 
-# Install dependencies + Build
+# install dependencies + build
 WORKDIR /app
 
 COPY package.json yarn.lock ./
@@ -13,4 +13,12 @@ COPY . .
 
 RUN yarn build
 
-# Nginx server? TODO: railway deployment
+# nginx server
+FROM nginx:1.25.4-alpine3.18
+
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /var/www/html/
+
+EXPOSE 5173
+
+ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

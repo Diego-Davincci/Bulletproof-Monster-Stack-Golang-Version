@@ -108,7 +108,7 @@ export const useApiMutation = <
       if (onSuccessFn) onSuccessFn(data, variables, context);
     },
     // If any error from the http request, render a toast showing the msg sent by the backend
-    onError: (error, variables, context) => {
+    onError: (error, _variables, _context) => {
       toast.error(error.name, {
         description: error.message,
         duration: 10000,
