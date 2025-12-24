@@ -11,8 +11,6 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 COPY .env.example .env
 
-ARG VITE_API_URL
-
 COPY . .
 
 RUN yarn build
