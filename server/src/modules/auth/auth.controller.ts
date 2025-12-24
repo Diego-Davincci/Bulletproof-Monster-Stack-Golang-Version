@@ -19,12 +19,12 @@ export const googleCallback = (
     "google",
     {
       session: false,
-      failureRedirect: `${env.WEBSITE}/login?err="We're having problems with google login, please retry."`,
+      failureRedirect: `${env.WEBSITE}/login?err="We're having problems with google login, please retry"`,
     },
     (err, user) => {
       if (err) {
         return res.redirect(
-          `${env.WEBSITE}/login?err="We're having problems with google login, please retry."`
+          `${env.WEBSITE}/login?err="We're having problems with google login, please retry"`
         );
       }
 

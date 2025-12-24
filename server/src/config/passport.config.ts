@@ -20,7 +20,7 @@ passport.use(
         return done(null, user);
       } catch (err) {
         console.error("Google flow error: ", err);
-        return done(err);
+        return done(err, undefined);
       }
     }
   )
