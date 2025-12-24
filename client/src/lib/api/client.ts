@@ -15,6 +15,7 @@ export const getHttpRequest = async <Response>(
   url: string
 ): Promise<Response> => {
   try {
+    console.log("HTTP url", url);
     const req = await fetch(url, {
       method: "GET",
       headers: {
