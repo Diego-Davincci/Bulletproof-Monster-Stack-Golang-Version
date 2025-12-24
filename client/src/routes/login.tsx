@@ -25,8 +25,6 @@ export const Route = createFileRoute("/login")({
 function RouteComponent() {
   const { err } = useSearch({ from: "/login" });
 
-  console.log(err);
-
   return (
     <main className="w-full min-h-screen flex items-center justify-center flex-col gap-y-5">
       <Button onClick={() => {}} asChild>
