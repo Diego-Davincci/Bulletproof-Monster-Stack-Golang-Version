@@ -13,6 +13,8 @@ RUN yarn install --ignore-engines --frozen-lockfile
 # Copy the TypeScript source code
 COPY tsconfig.json ./
 COPY src ./src
+ARG ENABLE_ALPINE_PRIVATE_NETWORKING
+ENV ENABLE_ALPINE_PRIVATE_NETWORKING=true
 
 # Build the TypeScript code
 RUN yarn build
