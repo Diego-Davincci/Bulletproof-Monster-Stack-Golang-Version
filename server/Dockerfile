@@ -13,8 +13,6 @@ RUN yarn install --ignore-engines --frozen-lockfile
 # Copy the TypeScript source code
 COPY tsconfig.json ./
 COPY src ./src
-ARG ENABLE_ALPINE_PRIVATE_NETWORKING
-ENV ENABLE_ALPINE_PRIVATE_NETWORKING=true
 
 # Build the TypeScript code
 RUN yarn build
@@ -35,9 +33,11 @@ RUN yarn install --ignore-engines --production --frozen-lockfile && yarn cache c
 COPY --from=builder /app/build ./src
 
 # Copy the .env file
-COPY .env.example .env
+# COPY .env.example .env
 
 # Set environment variables (optional, for production)
+ARG ENABLE_ALPINE_PRIVATE_NETWORKING
+ENV ENABLE_ALPINE_PRIVATE_NETWORKING=true
 ENV NODE_ENV=production
 
 # Expose the port the app runs on
