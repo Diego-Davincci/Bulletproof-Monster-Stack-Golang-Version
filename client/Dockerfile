@@ -12,6 +12,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY . .
 
 ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
 
 RUN yarn build
 

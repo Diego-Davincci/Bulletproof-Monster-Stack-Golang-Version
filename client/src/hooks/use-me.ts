@@ -20,6 +20,8 @@ export const useMe = () => {
   const getUser = async () => {
     try {
       setLoading(true);
+      console.log("API_URL", API_URL);
+      console.log("API_URL with import", import.meta.env.VITE_API_URL);
       const userData = await getHttpRequest<User>(`${API_URL}/auth/me`);
       updateUser(userData);
     } catch (error) {
