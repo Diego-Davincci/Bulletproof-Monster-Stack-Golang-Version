@@ -9,9 +9,9 @@ RUN yarn install --frozen-lockfile
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-ARG VITE_API_URL
-
 COPY .env.example .env
+
+ARG VITE_API_URL
 
 COPY . .
 
