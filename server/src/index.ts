@@ -9,7 +9,7 @@ import rateLimit from "express-rate-limit";
 
 import "./config/passport.config";
 import { authRoutes } from "@/modules/auth/auth.routes";
-import { HTTP_STATUS } from "./utils/constants";
+import { HTTP_STATUS, __prod__ } from "./utils/constants";
 import { buildJsonRsp } from "./utils/json";
 import { getEnv } from "./utils/env";
 
@@ -42,6 +42,9 @@ const main = async () => {
     ipv6Subnet: 60,
   });
   server.use(ApiLimiter);
+  if (__prod__) {
+    server.set("trust proxy", 1);
+  }
 
   // Health endpoint
   server.get("/health", (req: Request, res: Response) => {
