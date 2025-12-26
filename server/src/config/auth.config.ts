@@ -8,11 +8,13 @@ const env = getEnv();
 export const authConfig = {
   // Cookies config
   cookieOptions: {
+    // TODO: if we get a private domain, change this config object
     httpOnly: true,
     secure: __prod__,
-    sameSite: "lax",
+    // sameSite: "lax",
+    sameSite: "none",
     path: "/",
-    domain: __prod__ ? env.DOMAIN : "localhost",
+    // domain: __prod__ ? env.DOMAIN : "localhost",
     maxAge: 1000 * 60 * 60 * 24 * 365 * 10, // 10 year
   } as const,
 

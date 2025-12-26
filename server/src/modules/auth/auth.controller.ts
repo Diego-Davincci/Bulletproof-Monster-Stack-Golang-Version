@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
 
-import { DbUSer } from "@/db/client";
 import { getEnv } from "@/utils/env";
 import { setAuthCookies } from "@/utils/token";
 import { COMMON_MESSAGES, HTTP_STATUS } from "@/utils/constants";
@@ -22,6 +21,8 @@ export const googleCallback = (
       failureRedirect: `${env.WEBSITE}/login?err="We're having problems with google login, please retry"`,
     },
     (err, user) => {
+      // console.log("error", err);
+      // console.log("user", user);
       if (err) {
         return res.redirect(
           `${env.WEBSITE}/login?err="We're having problems with google login, please retry"`

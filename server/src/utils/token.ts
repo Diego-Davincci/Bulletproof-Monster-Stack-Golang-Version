@@ -96,8 +96,6 @@ export const checkTokens = (
  */
 export const setAuthCookies = (res: Response, user: DbUSer): void => {
   const { accessToken, refreshToken } = createTokens(user);
-  console.log("website url", env.WEBSITE);
-  console.log("setting cookies", authConfig.cookieOptions);
   res.cookie("accessID", accessToken, authConfig.cookieOptions);
   res.cookie("refreshID", refreshToken, authConfig.cookieOptions);
 };
