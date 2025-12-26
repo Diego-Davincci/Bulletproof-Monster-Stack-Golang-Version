@@ -21,7 +21,7 @@ const main = async () => {
   // Server config
   server.use(
     cors({
-      origin: process.env.WEBSITE,
+      origin: env.WEBSITE,
       credentials: true,
       methods: ["GET", "PUT", "PATCH", "POST", "DELETE"],
       allowedHeaders: [
