@@ -2,16 +2,14 @@
 
 ## API goal
 
-write down here what the API is being build for the client...
+...
 
 ### Core Libraries 📚
 
-- Express 👉 To create fully our API (routing, middlewares etc..)
-- Drizzle ORM and Pg 👉 To handle DB communication, operations, migrations (we're using postgres)
-- Passport and Passport-google-oauth20 👉 To handle OAUTH flow with providers such as google
-- Morgan 👉 Server logging
-- Jsonwebtoken 👉 To create JWT for auth
-- Cors 👉 Block unknown requests from websites
+- Chi 👉 Handle routing, middlewares, grouping...
+- Postgres + pgx + sqlc + goose 👉 To handle DB communication, operations, migrations (we're using postgres)
+- oauth2 + golang-jwt 👉 To handle OAUTH flow with providers such as google
+- go-chi/cors 👉 Block unknown requests from websites
 
 ### Feature based | Domain-Oriented Architecture
 
